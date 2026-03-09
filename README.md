@@ -4,6 +4,10 @@ WaferVision AI is a semiconductor wafer-defect inspection platform that combines
 
 It is designed to help inspect wafer images, monitor recent defect patterns, and identify whether a current defect is isolated or part of a broader manufacturing-process issue.
 
+## Live Demo
+
+Frontend: https://wafer-map-pattern-system.vercel.app/
+
 ## ✨ Highlights
 
 - 🧠 CNN ensemble prediction using ResNet18, MobileNetV2, and EfficientNetB0
