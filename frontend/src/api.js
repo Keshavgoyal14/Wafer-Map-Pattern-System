@@ -1,4 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000'
+const NORMALIZED_API_BASE_URL = API_BASE_URL.replace(/\/+$/, '')
 
 async function readJson(response) {
   const payload = await response.json().catch(() => ({}))
@@ -9,7 +10,8 @@ async function readJson(response) {
 }
 
 function buildApiUrl(path) {
-  return `${API_BASE_URL}${path}`
+  const normalizedPath = path.startsWith('/') ? path : `/${path}`
+  return `${NORMALIZED_API_BASE_URL}${normalizedPath}`
 }
 
 export async function analyzeWafer(file) {
