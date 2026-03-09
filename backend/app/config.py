@@ -23,3 +23,7 @@ AWS_S3_PREFIX = os.getenv("AWS_S3_PREFIX")
 
 # CORS
 CORS_ORIGINS = os.getenv("CORS_ORIGINS", "")
+CORS_ORIGIN_REGEX = os.getenv(
+	"CORS_ORIGIN_REGEX",
+	r"^https://wafer-map-pattern-system(?:-[a-z0-9-]+)?\.vercel\.app$",
+)

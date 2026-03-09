@@ -225,7 +225,10 @@ AWS_REGION=
 AWS_BUCKET=
 AWS_S3_PREFIX=
 CORS_ORIGINS=https://wafer-map-pattern-system.vercel.app
+CORS_ORIGIN_REGEX=^https://wafer-map-pattern-system(?:-[a-z0-9-]+)?\.vercel\.app$
 ```
+
+`CORS_ORIGIN_REGEX` allows Vercel preview deployments for this project while keeping CORS restricted to the expected domain pattern.
 
 Current frontend deployment:
 
