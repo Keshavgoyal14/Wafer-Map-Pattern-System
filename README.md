@@ -1,60 +1,23 @@
-# WaferVision AI
+# WaferVision AI 🔬
 
-WaferVision AI is a wafer-defect inspection system built around a Python inference backend and a React dashboard. It classifies wafer map defects with a CNN ensemble, generates defect heatmaps, stores inspection history in MongoDB, optionally uploads artifacts to AWS S3, and produces Gemini-based operator insights for both the current wafer and recent manufacturing trends.
+WaferVision AI is a semiconductor wafer-defect inspection platform that combines a Python backend, a React dashboard, CNN-based defect classification, heatmap generation, MongoDB history tracking, AWS artifact storage, and Gemini-generated engineering insights.
 
-## Overview
+It is designed to help inspect wafer images, monitor recent defect patterns, and identify whether a current defect is isolated or part of a broader manufacturing-process issue.
 
-The project is split into two main parts:
+## ✨ Highlights
 
-- `backend/`: FastAPI API, Streamlit app, model inference, MongoDB, AWS, and Gemini integration
-- `frontend/`: React dashboard built with Vite
+- 🧠 CNN ensemble prediction using ResNet18, MobileNetV2, and EfficientNetB0
+- 🔥 Heatmap generation for visual defect interpretation
+- 📊 React dashboard with Overview, Analyze, History, and Analytics pages
+- 🗂️ MongoDB-backed inspection history
+- ☁️ Optional AWS S3 storage for uploaded images and heatmaps
+- 🤖 Gemini insights for:
+  - current wafer analysis
+  - manufacturing process analysis using the last 30 to 40 wafers
+- ⚡ FastAPI backend for frontend integration
+- 🖥️ Streamlit dashboard retained for internal workflow and debugging
 
-The current UI exposes four main pages:
-
-- `Overview`: KPI dashboard, trends, severity, and recent inspections
-- `Analyze`: image upload, prediction, heatmap, current-wafer insight, and manufacturing-process insight
-- `History`: historical inspection records from MongoDB
-- `Analytics`: defect distribution and process pattern monitoring
-
-## Architecture
-
-### Backend
-
-The backend contains:
-
-- `backend/api/main.py`: FastAPI endpoints used by the React frontend
-- `backend/app/`: Streamlit dashboard entry point and pages
-- `backend/services/inference_service.py`: CNN ensemble inference and heatmap generation
-- `backend/services/gemini_service.py`: current-wafer and manufacturing-process insight generation
-- `backend/services/mongo_service.py`: MongoDB persistence and history access
-- `backend/services/aws_service.py`: optional S3 uploads for images and heatmaps
-- `backend/database/mongodb.py`: MongoDB client/collection setup
-- `backend/database/schema.py`: helper for stored wafer analysis documents
-- `backend/models/`: trained CNN and YOLO model assets used by the backend
-
-### Frontend
-
-The frontend contains:
-
-- `frontend/src/App.jsx`: application shell and routing
-- `frontend/src/pages/OverviewPage.jsx`
-- `frontend/src/pages/AnalyzePage.jsx`
-- `frontend/src/pages/HistoryPage.jsx`
-- `frontend/src/pages/AnalyticsPage.jsx`
-
-## Core Features
-
-- CNN ensemble prediction using ResNet18, MobileNetV2, and EfficientNetB0
-- Heatmap generation for localized visual explanation
-- MongoDB-backed inspection history
-- Gemini insights:
-	- current wafer insight
-	- manufacturing process insight based on the last 30 to 40 wafers
-- Optional AWS S3 storage for uploaded wafer images and generated heatmaps
-- FastAPI endpoints for frontend integration
-- Streamlit dashboard retained alongside the React frontend
-
-## Project Structure
+## 🏗️ Project Structure
 
 ```text
 Wafer Map Pattern System/
@@ -74,16 +37,52 @@ Wafer Map Pattern System/
 └─ test_pipeline.py
 ```
 
-## Prerequisites
+## 🧩 Architecture
 
-- Python 3.11+ recommended
-- Node.js 18+ recommended
-- MongoDB database
-- Optional: AWS S3 bucket and Gemini API key
+### Backend
 
-## Python Dependencies
+- `backend/api/main.py`: FastAPI routes used by the React frontend
+- `backend/app/`: Streamlit app and Streamlit pages
+- `backend/services/inference_service.py`: model loading, classification, heatmap generation
+- `backend/services/gemini_service.py`: current-wafer and manufacturing-process insights
+- `backend/services/mongo_service.py`: analysis persistence and history access
+- `backend/services/aws_service.py`: optional S3 uploads
+- `backend/database/mongodb.py`: MongoDB collection setup
+- `backend/database/schema.py`: schema helper for saved wafer documents
+- `backend/models/`: trained model files used by inference
 
-The root `requirements.txt` currently includes:
+### Frontend
+
+- `frontend/src/App.jsx`: shell and route layout
+- `frontend/src/pages/OverviewPage.jsx`: KPI and monitoring dashboard
+- `frontend/src/pages/AnalyzePage.jsx`: upload, prediction, heatmap, and insights
+- `frontend/src/pages/HistoryPage.jsx`: historical inspection review
+- `frontend/src/pages/AnalyticsPage.jsx`: defect-distribution and process analytics
+
+## 📱 Dashboard Pages
+
+- `Overview` 📈: summary KPIs, severity charts, recent inspections, and trend monitoring
+- `Analyze` 🧪: upload a wafer image and generate prediction, heatmap, and Gemini insights
+- `History` 🕘: inspect stored records and artifact links
+- `Analytics` 📊: analyze defect mix and process-level patterns
+
+## 🧠 Model Training
+
+The models used in this project were trained in Google Colab.
+
+- Google Colab notebook: https://colab.research.google.com/drive/1V3XBRUfvEa-3m-sP53dmVoVTTbUUyglE?usp=sharing
+
+## ⚙️ Prerequisites
+
+- Python 3.11+
+- Node.js 18+
+- MongoDB
+- Optional AWS S3 bucket
+- Optional Gemini API key
+
+## 📦 Python Dependencies
+
+The root `requirements.txt` includes:
 
 - `fastapi`
 - `uvicorn[standard]`
@@ -99,11 +98,9 @@ The root `requirements.txt` currently includes:
 - `python-multipart`
 - `python-dotenv`
 
-## Environment Variables
+## 🔐 Environment Variables
 
-Create a file at `backend/.env` for backend configuration.
-
-Expected backend variables:
+Create `backend/.env`:
 
 ```env
 MONGO_URI=
@@ -118,17 +115,15 @@ AWS_REGION=
 AWS_BUCKET_NAME=
 ```
 
-Create a file at `frontend/.env` for the frontend.
-
-Expected frontend variables:
+Create `frontend/.env`:
 
 ```env
 VITE_API_BASE_URL=http://127.0.0.1:8000
 ```
 
-## Installation
+## 🚀 Installation
 
-### Backend
+### Backend setup
 
 From the project root:
 
@@ -138,7 +133,7 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-### Frontend
+### Frontend setup
 
 From the `frontend/` folder:
 
@@ -146,35 +141,30 @@ From the `frontend/` folder:
 npm install
 ```
 
-## Running the Project
+## ▶️ Run the Project
 
-### Run the FastAPI backend
-
-From the project root:
+### Start the FastAPI backend
 
 ```powershell
 uvicorn backend.main:app --host 127.0.0.1 --port 8000
 ```
 
-### Run the React frontend
-
-From the `frontend/` folder:
+### Start the React frontend
 
 ```powershell
+cd frontend
 npm run dev
 ```
 
-### Run the Streamlit dashboard
-
-From the project root:
+### Start the Streamlit dashboard
 
 ```powershell
 streamlit run backend/app/main.py
 ```
 
-## API Endpoints
+## 🔌 API Endpoints
 
-The FastAPI service currently exposes:
+The backend currently exposes:
 
 - `GET /health`
 - `GET /overview`
@@ -184,7 +174,7 @@ The FastAPI service currently exposes:
 
 ### `POST /analyze`
 
-Accepts an uploaded wafer image and returns:
+Returns:
 
 - `prediction`
 - `heatmap_base64`
@@ -193,49 +183,47 @@ Accepts an uploaded wafer image and returns:
 - `recent_similar_wafers`
 - `current_wafer_insight`
 - `process_insight`
-- `insight` (backward-compatible alias for current wafer insight)
+- `insight` as a backward-compatible alias for current wafer insight
 
-## Stored Inspection Data
+## 🗃️ Stored Analysis Data
 
-Each saved analysis document includes:
+Each saved MongoDB document includes:
 
 - timestamp
-- uploaded image URL
+- image URL
 - heatmap URL
 - prediction
 - detections
 - current wafer insight
 - manufacturing process insight
-- human feedback fields for review/verification
+- human feedback metadata
 
-## Notes
+## 📝 Notes
 
-- The React app is the primary modern dashboard.
-- The Streamlit app still exists for quick internal inspection and debugging workflows.
-- `Yield Rate` on the current Overview page is a classifier-based proxy, not true fab yield.
-- YOLO detections are still available in backend results, but are currently de-emphasized in the UI.
+- The React dashboard is the primary UI.
+- The Streamlit app remains available for internal review and debugging.
+- `Yield Rate` in the Overview page is currently a classifier-based proxy, not true fab yield.
+- YOLO detections are still returned by the backend, but they are currently not emphasized in the UI.
 
-## Testing
+## 🧪 Testing
 
-There is a simple pipeline script at `test_pipeline.py` that can be used to validate inference wiring.
-
-Example:
+Run the simple pipeline check:
 
 ```powershell
 python test_pipeline.py
 ```
 
-## Recommended Workflow
+## ✅ Suggested Workflow
 
-1. Start MongoDB and ensure backend environment variables are set.
-2. Start the backend API.
-3. Start the frontend.
+1. Start MongoDB and configure `backend/.env`.
+2. Start the FastAPI backend.
+3. Start the React frontend.
 4. Upload a wafer image from the Analyze page.
-5. Review prediction, heatmap, current wafer insight, and manufacturing process insight.
-6. Use Overview, History, and Analytics to inspect recent behavior across stored records.
+5. Review the prediction, heatmap, current-wafer insight, and manufacturing-process insight.
+6. Use Overview, History, and Analytics for monitoring and process review.
 
-## Repository Notes
+## 📌 Repository Notes
 
 - Backend source of truth: `backend/`
 - Frontend source of truth: `frontend/`
-- Legacy top-level Streamlit files were removed so `backend/app/` is the only active Streamlit app path.
+- Active Streamlit source path: `backend/app/`
