@@ -227,3 +227,7 @@ python test_pipeline.py
 - Backend source of truth: `backend/`
 - Frontend source of truth: `frontend/`
 - Active Streamlit source path: `backend/app/`
+
+## 👤 Author
+
+Keshav Goyal
