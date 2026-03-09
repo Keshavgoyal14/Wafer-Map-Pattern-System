@@ -16,18 +16,26 @@ from services.aws_service import upload_bytes
 from services.gemini_service import generate_wafer_insights
 from services.mongo_service import get_history, save_analysis
 from services.inference_service import run_inference
+from app.config import CORS_ORIGINS
+
+
+def _get_allowed_origins() -> list[str]:
+    default_origins = [
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://localhost:3000",
+        "http://127.0.0.1:3000",
+    ]
+
+    configured_origins = [origin.strip() for origin in CORS_ORIGINS.split(",") if origin.strip()]
+    return list(dict.fromkeys([*default_origins, *configured_origins]))
 
 
 app = FastAPI(title="WaferVision AI API", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "http://localhost:5173",
-        "http://127.0.0.1:5173",
-        "http://localhost:3000",
-        "http://127.0.0.1:3000",
-    ],
+    allow_origins=_get_allowed_origins(),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

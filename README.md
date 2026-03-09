@@ -120,7 +120,10 @@ GEMINI_API_KEY=
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_REGION=
-AWS_BUCKET_NAME=
+AWS_BUCKET=
+AWS_S3_PREFIX=
+
+CORS_ORIGINS=http://localhost:5173,http://127.0.0.1:5173
 ```
 
 Create `frontend/.env`:
@@ -169,6 +172,62 @@ npm run dev
 ```powershell
 streamlit run backend/app/main.py
 ```
+
+## ☁️ Deployment
+
+This project is set up for split deployment:
+
+- `frontend/` -> Vercel
+- `backend/` -> Render
+
+### Deploy frontend to Vercel
+
+The frontend includes [frontend/vercel.json](frontend/vercel.json) for SPA routing fallback.
+
+Recommended Vercel settings:
+
+- Framework preset: `Vite`
+- Root directory: `frontend`
+- Build command: `npm run build`
+- Output directory: `dist`
+
+Set this environment variable in Vercel:
+
+```env
+VITE_API_BASE_URL=https://YOUR-RENDER-BACKEND.onrender.com
+```
+
+### Deploy backend to Render
+
+The backend includes [render.yaml](render.yaml) for Render deployment.
+
+Recommended Render setup:
+
+- Service type: `Web Service`
+- Root directory: `backend`
+- Build command: `pip install -r requirements.txt`
+- Start command: `uvicorn main:app --host 0.0.0.0 --port $PORT`
+
+Set these environment variables in Render:
+
+```env
+MONGO_URI=
+DATABASE_NAME=
+COLLECTION_NAME=
+GEMINI_API_KEY=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_REGION=
+AWS_BUCKET=
+AWS_S3_PREFIX=
+CORS_ORIGINS=https://wafer-map-pattern-system.vercel.app
+```
+
+Current frontend deployment:
+
+- https://wafer-map-pattern-system.vercel.app/
+
+Use [backend/.env.example](backend/.env.example) and [frontend/.env.example](frontend/.env.example) as the variable reference templates.
 
 ## 🔌 API Endpoints
 
