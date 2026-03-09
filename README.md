@@ -41,18 +41,7 @@ Wafer Map Pattern System/
 
 ### System Flow
 
-```mermaid
-flowchart LR
-  A[Wafer Input\nWafer Map Images] --> B[Preprocessing\nNormalization\nNoise Reduction\nContrast Enhancement]
-  B --> C[AI ML Engine\nCNN / Vision Transformer\nDefect Detection\nPattern Classification]
-  C --> D[Pattern Analysis\nFeature Extraction\nDefect Clustering\nPattern Identification]
-  D --> E[GenAI Insights\nInsight Generator\nRecommendations]
-  E --> F[Dashboard\nInsight Cards\nWafer Heatmaps]
-  E --> G[Alerts Reporting\nEngineer Notifications\nSummary Reports]
-  C --> H[Data Storage\nImage Store\nFeature Store\nPrediction History]
-  H --> F
-  F --> H
-```
+![WaferVision AI Architecture](docs/architecture.png)
 
 ### Backend
 
@@ -80,6 +69,10 @@ flowchart LR
 - `Analyze` 🧪: upload a wafer image and generate prediction, heatmap, and Gemini insights
 - `History` 🕘: inspect stored records and artifact links
 - `Analytics` 📊: analyze defect mix and process-level patterns
+
+### Dashboard Preview
+
+![WaferVision AI Dashboard](docs/DashBoard.png)
 
 ## 🧠 Model Training
 
