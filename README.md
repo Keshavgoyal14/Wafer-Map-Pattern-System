@@ -39,6 +39,21 @@ Wafer Map Pattern System/
 
 ## 🧩 Architecture
 
+### System Flow
+
+```mermaid
+flowchart LR
+  A[Wafer Input\nWafer Map Images] --> B[Preprocessing\nNormalization\nNoise Reduction\nContrast Enhancement]
+  B --> C[AI ML Engine\nCNN / Vision Transformer\nDefect Detection\nPattern Classification]
+  C --> D[Pattern Analysis\nFeature Extraction\nDefect Clustering\nPattern Identification]
+  D --> E[GenAI Insights\nInsight Generator\nRecommendations]
+  E --> F[Dashboard\nInsight Cards\nWafer Heatmaps]
+  E --> G[Alerts Reporting\nEngineer Notifications\nSummary Reports]
+  C --> H[Data Storage\nImage Store\nFeature Store\nPrediction History]
+  H --> F
+  F --> H
+```
+
 ### Backend
 
 - `backend/api/main.py`: FastAPI routes used by the React frontend
